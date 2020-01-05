@@ -1,0 +1,86 @@
+html{
+  height:100%
+}
+
+body{
+  height:100%;
+}
+
+.intro{
+  height:100%
+}
+
+/***************************************************************************/
+.left{
+  height : 100%;
+  background: url(img/register.png) no-repeat;
+  background-size: cover;
+  min-height: 800px;
+
+}
+
+.right{
+  background-color:#FFF;
+  height : 100%;
+  min-height: 800px;
+}
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 48%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+  
+/***************************************************************************/
+.logo h1{
+  margin-top: 10px;
+  font-size: 50px;
+  color: #9498EE;
+  font-family: 'Ma Shan Zheng', cursive;
+}
+
+
+.register-logan {
+    color: white;
+}
+
+/***************************************************************************/
+.login-box{
+  width: 280px;
+
+}
+
+.text-box {
+  border-radius: 0.8rem;
+  border: 2px solid #73A2EA ;
+}
+
+.custom-error-feedback {
+  width: 100%;
+  margin-left: 3px;
+  display: flex;
+  color: gray;
+}
+
+.btn-two{
+  width: 50%;
+  background: rgb(213, 213, 236);
+  border: 2px solid black;
+  color: white;
+  padding: 5px;
+  font-size: 18px;
+  font-style: italic;
+  cursor: pointer;
+  margin: 12px 0;
+  border-radius: 0.8rem;
+}
+
+
+.alert {
+  width: 70%;
+}
+
+
+

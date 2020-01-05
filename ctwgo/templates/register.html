@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='register.css') }}">
+
+    <title>CTWOGO-Register</title>
+</head>
+
+<!-------------------------------------- Main ---------------------------------------->
+<body>
+    <section class="intro row">
+
+        <div class="col-lg-6 left">
+            <div class="logo d-flex">
+                <img src="{{ url_for('static', filename='img/logo3.png') }}" width="80" height="80" class="mr-2">
+                <h1>CTWGO</h1>
+            </div>
+    
+            <div class="centered register-logan ">
+                <h2>Welcome to CTWGO</h2>
+                <p>Are you ready to join us?</p>
+                <a href="{{ url_for('main.home') }}">
+                    <button type="button" class="btn btn-outline-light">Home</button>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-6 right">
+            <div class="centered">
+                <form class="login-box mx-auto" method="POST" action="">
+                    {{ form.hidden_tag() }}
+
+                    <div class="form-group">
+                        {% if form.username.errors %}
+                        <div class="text-box">
+                            {{ form.username(class="form-control font-italic", placeholder="Username") }}
+                        </div>
+    
+                        <div class="custom-error-feedback">
+                            {% for error in form.username.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+    
+                        {% else %}
+                        <div class="text-box">
+                            {{ form.username(class="form-control font-italic", placeholder="Username") }}
+                        </div>
+                        {% endif %}
+                    </div>
+    
+                    <div class="form-group">
+                        {% if form.email.errors %}
+                        <div class="text-box">
+                            {{ form.email(class="form-control font-italic", placeholder="Email") }}
+                        </div>
+    
+                        <div class="custom-error-feedback">
+                            {% for error in form.email.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+    
+                        {% else %}
+                        <div class="text-box">
+                            {{ form.email(class="form-control font-italic", placeholder="Email") }}
+                        </div>
+                        {% endif %}
+                    </div>
+    
+                    <div class="form-group">
+                        {% if form.password.errors %}
+                        <div class="text-box">
+                            {{ form.password(class="form-control font-italic", placeholder="Password") }}
+                        </div>
+    
+                        <div class="custom-error-feedback">
+                            {% for error in form.password.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+    
+                        {% else %}
+                        <div class="text-box">
+                            {{ form.password(class="form-control font-italic", placeholder="Password") }}
+                        </div>
+                        {% endif %}
+                    </div>
+    
+                    <div class="form-group">
+                        {% if form.confirm_password.errors %}
+                        <div class="text-box">
+                            {{ form.confirm_password(class="form-control font-italic", placeholder="Confirm Password") }}
+                        </div>
+    
+                        <div class="custom-error-feedback">
+                            {% for error in form.confirm_password.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+    
+                        {% else %}
+                        <div class="text-box">
+                            {{ form.confirm_password(class="form-control font-italic", placeholder="Confirm Password") }}
+                        </div>
+                        {% endif %}
+                    </div>
+    
+                    <div class="form-group">
+                        {{ form.submit(class="btn btn-two") }}
+                    </div>
+    
+                </form>
+    
+                <div class="d-flex justify-content-center">
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                    {% for category, message in messages %}
+                    <div class="alert alert-light p-0 m-0 text-center text-danger">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                </div>
+    
+                <div class="">
+                    <small class="text-muted">
+                        Alread Have an Account?
+                        <a class="ml-2" href="{{ url_for('users.login') }}">
+                            Sign in
+                        </a>
+                    </small>
+                </div>
+    
+            </div>
+        </div>
+
+    </section>
+
+
+<!-------------------------------------------------------------------------------------------->
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

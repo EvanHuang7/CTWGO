@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='login.css') }}">
+
+    <title>CTWOGO-Login</title>
+</head>
+
+<!-------------------------------------------------------------------------------------------->
+<!-------------------------------------- Main ---------------------------------------->
+<body>
+    <div class="login-container">
+        <div class="logo d-flex justify-content-center mr-5">
+            <img src="{{ url_for('static', filename='img/logo2.png') }}" width="50" height="50" class="brand mt-3 mr-3">
+            <h1>CTWGO</h1>
+        </div>
+
+        <form class="login-box mx-auto" method="POST" action="">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                <!-- if input is not valid -->
+                {% if form.email.errors %}
+                    <div class="text-box">
+                        {{ form.email(class="form-control", placeholder="Email") }}
+                    </div>
+
+                    <div class="custom-error-feedback">
+                        {% for error in form.email.errors %}
+                             <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="text-box">
+                        {{ form.email(class="form-control ", placeholder="Email") }}
+                    </div>
+                {% endif %}
+            </div>
+
+
+            <div class="form-group">
+                <!-- if input is not valid -->
+                {% if form.password.errors %}
+                    <div class="text-box">
+                        {{ form.password(class="form-control", placeholder="Password") }}
+                    </div>
+
+                    <div class="custom-error-feedback">
+                        {% for error in form.password.errors %}
+                             <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="text-box">
+                        {{ form.password(class="form-control ", placeholder="Password") }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="form-check">
+                {{ form.remember(class="form-check-input") }}
+                {{ form.remember.label(class="form-check-input-label") }}
+            </div>
+
+            <div class="form-group">
+                {{ form.submit(class="btn") }}
+            </div>
+
+        </form>
+
+        <div class="d-flex justify-content-center">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-light p-0 m-0 text-center text-danger">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            {% endwith %}
+        </div>
+        
+        <div class="pt3 text-center">
+            <small class="text-muted">
+                <a href="{{ url_for('users.reset_request') }}">Forget Password?</a>
+            </small>
+
+            <small class="text-muted">
+                <a class="ml-2" href="{{ url_for('users.register') }}">
+                    Sign Up Now
+                </a>
+            </small>
+        </div>
+
+    </div>
+
+
+
+<!-------------------------------------------------------------------------------------------->
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

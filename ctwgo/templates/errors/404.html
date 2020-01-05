@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block content %}
+	<div class="content-section py-3">
+        <h1>Oops. Page Not Found (404)</h1>
+        <p>That page does not exist. Please try a different location.</p>
+    </div>
+
+{% endblock content%}
+
+
+{% block sidebar_content2 %}
+	<div class="content-section">
+		<h3 class="text-dark">CTWGO Navigation</h3>	
+		<img src="{{ url_for('static', filename='img/logo.png') }}" width="45" height="45" class="d-inline-block align-top" alt="">
+		<ul class="pl-0">
+			<li class="mb-2"><a class="text-muted" href="{{ url_for('main.home') }}">Home</a></li>
+			<li class="mb-2"><a class="text-muted" href="{{ url_for('main.about') }}">About</a></li>
+			<li class="mb-2"><a class="text-muted" href="{{ url_for('users.login') }}">Login</a></li>
+			<li class="mb-2"><a class="text-muted" href="{{ url_for('users.register') }}">Register</a></li>
+		</ul>
+	</div>
+{% endblock sidebar_content2 %}

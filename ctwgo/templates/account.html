@@ -1,0 +1,99 @@
+
+{% extends "layout.html" %}
+{% block content %}
+	<div class="content-section">
+		<div class="media">
+			<div class="media-body ml-0">
+				<img class="rounded-circle account-img mx-auto d-block mr-3" src="{{ image_file }}">
+			</div>
+		</div>
+
+		<!-- Why "enctype="multipart/form-data""? for our form to pass our image data -->
+		<form method="POST" action="" enctype="multipart/form-data">
+	
+			<!-- protect our form aiainst certain attacts. -->
+			{{ form.hidden_tag() }}
+	
+			<fieldset class="form-group">
+				<legend class="border-bottom mb-4 text-center">Account Information</legend>
+	
+				<div class="form-group">
+					{{ form.username.label(class="form-control-label font-italic") }}
+					<!-- if input is not valid -->
+					{% if form.username.errors %}
+						<div class="text-box">
+							{{ form.username(class="form-control", placeholder="Username") }}
+						</div>
+						<div class="custom-error-feedback">
+							{% for error in form.username.errors %}
+								 <span>{{ error }}</span>
+							{% endfor %}
+						</div>
+					{% else %}
+						<div class="text-box">
+							{{ form.username(class="form-control ", placeholder="Username") }}
+						</div>
+					{% endif %}
+				</div>
+	
+				<div class="form-group">
+					{{ form.email.label(class="form-control-label font-italic") }}
+					<!-- if input is not valid -->
+					{% if form.email.errors %}
+						<div class="text-box">
+							{{ form.email(class="form-control", placeholder="Email") }}
+						</div>
+						<div class="custom-error-feedback">
+							{% for error in form.email.errors %}
+								 <span>{{ error }}</span>
+							{% endfor %}
+						</div>
+					{% else %}
+						<div class="text-box">
+							{{ form.email(class="form-control ", placeholder="Email") }}
+						</div>
+					{% endif %}
+				</div>
+
+				<div class="form-group">
+					{{ form.picture.label() }}
+					{{ form.picture(class="form-control-file.") }}
+					<br>
+					
+					{% if form.picture.errors %}
+						{% for error in form.picture.errors %}
+							<span class="text-danger"> {{ error }}</span>
+							</br>
+						{% endfor %}
+					{% endif %}
+				</div>
+
+			</fieldset>
+				
+			<div class="form-group">
+				{{ form.submit(class="btn btn-outline-info") }}
+			</div>
+	
+		</form>
+
+	</div>
+
+{% endblock content%}
+
+
+
+
+
+{% block sidebar_content2 %}
+	<div class="content-section text-muted">
+        <div class="d-flex justify-content-center mt-4">
+            <h3 class="text-dark">Dear user, {{current_user.username}} </h3>
+        </div>	
+        <img src="{{ url_for('static', filename='img/logo.png') }}" width="45" height="45" class="d-inline-block align-top" alt="">
+		<ul class="pl-0">
+			<li class="mt-2 mb-2 font-italic"><p>You are the No.{{current_user.id}} user</p></li>
+			<li class="mb-4 font-italic"><p>You have released {{current_user.rank_post()}} posts</p></li>
+			<li class="mb-4 font-italic"><p>You have gotten {{current_user.rank_like()[1]}} likes</p></li>
+		</ul>
+	</div>
+{% endblock sidebar_content2 %}

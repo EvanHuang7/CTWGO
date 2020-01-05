@@ -1,0 +1,59 @@
+
+{% extends "layout.html" %}
+{% block content %}
+    <div class="content-section">
+        <form method="POST" action="">
+
+            <!-- protect our form aiainst certain attacts. -->
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">{{ legend }}</legend>
+
+                <div class="form-group">
+                    {{ form.content.label(class="form-control-label") }}
+                    <!-- if input is not valid -->
+                    {% if form.content.errors %}
+                        {{ form.content(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.content.errors %}
+                                <span> {{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.content(class="form-control form-control-lg", rows="3") }}
+                    {% endif %}
+                </div>
+
+            </fieldset>
+            
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info ") }}
+            </div>
+
+        </form>
+    </div>
+
+
+{% endblock content%}
+
+
+
+
+
+
+
+
+
+{% block sidebar_content2 %}
+	<div class="content-section text-muted">
+        <div class="d-flex justify-content-center mt-4">
+            <h3 class="text-dark">Dear user, {{current_user.username}} </h3>
+        </div>	
+        <img src="{{ url_for('static', filename='img/logo.png') }}" width="45" height="45" class="d-inline-block align-top" alt="">
+		<ul class="pl-0">
+			<li class="mt-2 mb-2 font-italic"><p>You are the No.{{current_user.id}} user</p></li>
+			<li class="mb-4 font-italic"><p>You have released {{current_user.rank_post()}} posts</p></li>
+			<li class="mb-4 font-italic"><p>You have gotten {{current_user.rank_like()[1]}} likes</p></li>
+		</ul>
+	</div>
+{% endblock sidebar_content2 %}

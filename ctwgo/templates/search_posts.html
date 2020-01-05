@@ -1,0 +1,82 @@
+
+{% extends "layout.html" %}
+
+{% block content %}
+	{% for post in posts.items %}
+		<article class="media content-section row">
+		  <ul class="col-2 p-0 text-center align-items-center mt-3">
+			<li><img class="rounded-circle article-img mx-auto d-block" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}"></li>
+			<li><a class="text-info" href="{{ url_for('users.user_posts', username=post.author.username) }}">{{ post.author.username }}</a></li >
+		  </ul>
+
+		  <div class="media-body pr-0">
+		    <h2>
+		    	<a class="article-title" href="{{ url_for('posts.post', post_id=post.id) }}">{{ post.title }}</a>
+		    </h2>
+
+			<p class="article-content">{{ post.content }}</p>
+			{% if post.picture_file != None %}
+				<p><img class="content-img" src="{{ url_for('static', filename='post_pics/' + post.picture_file ) }}"></p>
+			{% endif %}
+			
+			<div class="article-time">
+				<small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
+			</div>
+		  </div>
+
+		</article>
+	{% endfor %}
+
+	
+	<!-- Iterating the page numbers (paginate) -->
+	{% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+		{% if page_num %}
+
+			<!-- Make current page different, which is easy for user to idendify current page -->
+			{% if posts.page == page_num %}
+				<a class="btn btn-info mb-4" href=" {{ url_for('posts.search_posts', page=page_num, searching=searching) }} "> {{ page_num }}</a>
+			{% else %}
+				<a class="btn btn-outline-info mb-4" href=" {{ url_for('posts.search_posts', page=page_num, searching=searching) }} "> {{ page_num }}</a>
+			{% endif %}
+			
+		<!-- if page_num is none -->
+		{% else %}
+			...
+		{% endif %}
+	{% endfor %}
+
+	
+{% endblock content%}
+
+
+
+
+
+
+
+
+
+
+{% block sidebar_content2 %}
+	<div class=" content-section">
+		<div class="d-flex justify-content-center ml-2">
+			<i class="fas fa-bookmark mt-1 mr-2" style="color:rgb(163, 163, 238);"></i>
+			<h5 class="text-dark">There are {{ posts.total }} posts related to '{{ searching }}' </h5>
+		</div>
+		<hr class="my-2">
+
+		<h3 class="text-dark">CTWGO Navigation</h3>	
+		<img src="{{ url_for('static', filename='img/logo.png') }}" width="35" height="35" class="d-inline-block align-top" alt="">
+		<ul class="pl-0">
+			<li class="mb-2"><a class="text-muted" href="{{ url_for('main.home') }}">Home</a></li>
+			<li class="mb-2"><a class="text-muted" href="{{ url_for('main.about') }}">About</a></li>
+			{% if current_user.is_authenticated %}
+			<li class="mb-2"><a class="text-muted" href="{{ url_for('users.account') }}">Account</a></li>
+			<li class="mb-2"><a class="text-muted" href="{{ url_for('users.logout') }}">Logout</a></li>
+			{% else %}
+			<li class="mb-2"><a class="text-muted" href="{{ url_for('users.login') }}">Login</a></li>
+			<li class="mb-2"><a class="text-muted" href="{{ url_for('users.register') }}">Register</a></li>
+			{% endif %}
+		</ul>
+	</div>
+{% endblock sidebar_content2 %}
